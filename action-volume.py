@@ -3,8 +3,8 @@
 from snipsTools import SnipsConfigParser
 from hermes_python.hermes import Hermes
 from hermes_python.ontology import *
-import io
-import paho.mqtt.client as paho
+import paho.mqtt.client as mqtt
+import paho.mqtt.publish as publish
 import json
 import random
 
@@ -47,12 +47,7 @@ class Volume(object):
 
         print "Volume: " + str(volume)
 
-        tmpClient = paho.Client("tmp_hub")  # create client object
-        tmpClient.connect(MQTT_IP_ADDR, MQTT_PORT)  # establish connection
-        tmpClient.loop_start()
-        tmpClient.publish("sat/volume", json.dumps({"volume": volume, "siteId": intent_message.site_id}))
-        tmpClient.loop_stop()
-        tmpClient.disconnect()
+        publish.single('hermes/volume/set', payload=json.dumps({'siteId': intent_message.site_id, 'volume': volume}), hostname=MQTT_IP_ADDR, port=MQTT_PORT)
 
         # if need to speak the execution result by tts
         hermes.publish_start_session_notification(intent_message.site_id, ACK[random.randint(0,len(ACK) - 1)], "")
