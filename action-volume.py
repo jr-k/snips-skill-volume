@@ -14,7 +14,7 @@ MQTT_IP_ADDR = "localhost"
 MQTT_PORT = 1883
 MQTT_ADDR = "{}:{}".format(MQTT_IP_ADDR, str(MQTT_PORT))
 
-ACK = ["Trait bien", "OK", "daccord", "sait fait", "Pas de problaime", "entendu"]
+ACK = [u"Très bien", "OK", "daccord", u"C'est fait", u"Pas de problème", "entendu"]
 
 class Volume(object):
     """Class used to wrap action code with mqtt connection
