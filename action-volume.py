@@ -47,7 +47,7 @@ class Volume(object):
 
         print "Volume: " + str(volume)
 
-        publish.single('hermes/volume/set', payload=json.dumps({'siteId': intent_message.site_id, 'volume': volume}), hostname=MQTT_IP_ADDR, port=MQTT_PORT)
+        publish.single('hermes/artifice/volume/set', payload=json.dumps({'siteId': intent_message.site_id, 'volume': volume}), hostname=MQTT_IP_ADDR, port=MQTT_PORT)
 
         # if need to speak the execution result by tts
         hermes.publish_start_session_notification(intent_message.site_id, ACK[random.randint(0,len(ACK) - 1)], "")
